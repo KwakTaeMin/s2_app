@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'chat/chat_page.dart' as chat_page;
 
 void main() {
 
   runApp(
-    const Center(
-      child: Text(
-        'S2 App! Hello, world!!',
-        textDirection: TextDirection.ltr,
-      ),
+    const chat_page.ChatPage(
     ),
   );
 
