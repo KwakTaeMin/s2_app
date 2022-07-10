@@ -12,7 +12,7 @@ class ChatPage extends StatefulWidget{
 }
 
 class _ChatPageState extends State<ChatPage> {
-  Future<Chat>? chats;
+  Future<List<Chat>>? chats;
 
   @override
   void initState() {
@@ -23,18 +23,22 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     return Center(
-          child: FutureBuilder<Chat>(
+          child: FutureBuilder<List<Chat>>(
           //통신데이터 가져오기
           future: chats,
           builder: (context, chat) {
         if (chat.hasData) {
-          return buildColumn(chat);
+          return buildColumnList(chat);
         } else if (chat.hasError) {
           return Text("${chat.error}에러!!", textDirection: TextDirection.ltr);
         }
         return const CircularProgressIndicator();
       },
     ));
+  }
+
+  Widget buildColumnList(chats) {
+    return chats.map((chat) => buildColumn(chat));
   }
 
   Widget buildColumn(chat) {
