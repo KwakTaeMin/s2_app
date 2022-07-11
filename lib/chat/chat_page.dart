@@ -40,7 +40,7 @@ class _ChatPageState extends State<ChatPage> {
   Widget buildColumnList(chats) {
     return chats.map((chat) => buildColumn(chat));
   }
-
+// todo list column
   Widget buildColumn(chat) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
