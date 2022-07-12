@@ -38,11 +38,13 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   Widget buildColumnList(chats) {
-    return chats.map((chat) => buildColumn(chat));
+    return Column(
+      children: [chats.map((chat) => buildRow(chat))],
+    );
   }
 // todo list column
-  Widget buildColumn(chat) {
-    return Column(
+  Widget buildRow(chat) {
+    return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [

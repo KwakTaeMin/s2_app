@@ -49,3 +49,8 @@ $ export PATH="$PATH":"$HOME/.pub-cache/bin" // ~/.zshrc 환경 변수 추가
 $ fluttercors --disable // 비활성화 (이걸해야 로컬 cors 제거)
 $ fluttercors --enable // 활성화 
 ~~~
+
+### 약어
+~~~
+stless : StatelessWidget
+~~~
