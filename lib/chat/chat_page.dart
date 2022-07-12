@@ -12,12 +12,13 @@ class ChatPage extends StatefulWidget{
 }
 
 class _ChatPageState extends State<ChatPage> {
-  List<Chat> chats = [];
+  List<Chat> _chats = [];
+
 
   @override
   void initState() {
     super.initState();
-    chats = getChats();
+    _chats = getChats();
   }
 
   List<Chat> getChats() {
@@ -32,53 +33,26 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-          height: 100,
-          width: 200,
-          child : Row(
-            children: [
-              ListView.builder(
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  final chat = chats[index];
-                  return ListTile(
-                    title: Text(chat.userName),
-                    subtitle: Text(chat.message),
-                    trailing: Text(chat.messageDate,  style: const TextStyle(color: Colors.green),),
-                  );
-                },
-               // separatorBuilder: (context, index) => const Divider(),
-                itemCount: chats.length,
-                scrollDirection: Axis.horizontal,
-              ),
-            ],
+          height: 500,
+          width: 500,
+          child : Scrollbar(
+            child: ListView.builder(
+              //shrinkWrap: true,
+              itemBuilder: (context, index) {
+                final chat = _chats[index];
+                print(chat.messageDate);
+                return ListTile(
+                  title: Text(chat.userName),
+                  subtitle: Text(chat.message),
+                  trailing: Text(chat.messageDate,  style: const TextStyle(color: Colors.green),),
+                );
+              },
+              itemCount: _chats.length,
+              scrollDirection: Axis.horizontal,
+            ),
           ),
 
           );
-  }
-
-  Widget buildColumnList(List<Chat>? chats) {
-    if(chats == null){
-      return const Text("chat is null");
-    } else {
-      return Column(
-        children: chats.map((chat) => buildRow(chat)).toList(),
-      );
-    }
-  }
-// todo list column
-  Widget buildRow(chat) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Text(chat.data!.messageDate.toString(),
-            style: const TextStyle(fontSize: 20), textDirection: TextDirection.ltr),
-        Text(chat.data!.userName.toString(),
-            style: const TextStyle(fontSize: 20), textDirection: TextDirection.ltr),
-        Text(chat.data!.message.toString(),
-            style: const TextStyle(fontSize: 20), textDirection: TextDirection.ltr),
-      ],
-    );
   }
 
 }
