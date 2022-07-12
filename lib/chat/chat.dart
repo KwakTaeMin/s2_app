@@ -1,7 +1,7 @@
 
 class Chat {
   final int id;
-  final DateTime messageDate;
+  final String messageDate;
   final String userName;
   final String message;
 
@@ -14,14 +14,12 @@ class Chat {
   // todo : factory가 뭔지 알고가자
   factory Chat.fromJson(Map<String, dynamic> json) {
     return Chat(id: json["id"],
-                messageDate: json["message_date"],
-                userName: json["user_name"],
+                messageDate: json["messageDate"],
+                userName: json["userName"],
                 message: json["message"]
     );
   }
 
-/*  factory List<Chat>.fromJson(List<Map<String, dynamic>> json) {
-    return new List ->
-  }*/
+
 }
 

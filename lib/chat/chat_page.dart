@@ -1,5 +1,5 @@
+import 'dart:core';
 import 'package:flutter/material.dart';
-
 import 'chat.dart';
 import 'chat_service.dart' as chat_service;
 
@@ -12,35 +12,58 @@ class ChatPage extends StatefulWidget{
 }
 
 class _ChatPageState extends State<ChatPage> {
-  Future<List<Chat>>? chats;
+  List<Chat> chats = [];
 
   @override
   void initState() {
     super.initState();
-    chats = chat_service.getChats();
+    chats = getChats();
+  }
+
+  List<Chat> getChats() {
+    Future<List<Chat>> fChats = chat_service.getChats();
+
+    fChats.then((value) {
+      return value;
+    });
+    return [];
   }
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-          child: FutureBuilder<List<Chat>>(
-          //통신데이터 가져오기
-          future: chats,
-          builder: (context, chat) {
-        if (chat.hasData) {
-          return buildColumnList(chat);
-        } else if (chat.hasError) {
-          return Text("${chat.error}에러!!", textDirection: TextDirection.ltr);
-        }
-        return const CircularProgressIndicator();
-      },
-    ));
+    return SizedBox(
+          height: 100,
+          width: 200,
+          child : Row(
+            children: [
+              ListView.builder(
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  final chat = chats[index];
+                  return ListTile(
+                    title: Text(chat.userName),
+                    subtitle: Text(chat.message),
+                    trailing: Text(chat.messageDate,  style: const TextStyle(color: Colors.green),),
+                  );
+                },
+               // separatorBuilder: (context, index) => const Divider(),
+                itemCount: chats.length,
+                scrollDirection: Axis.horizontal,
+              ),
+            ],
+          ),
+
+          );
   }
 
-  Widget buildColumnList(chats) {
-    return Column(
-      children: [chats.map((chat) => buildRow(chat))],
-    );
+  Widget buildColumnList(List<Chat>? chats) {
+    if(chats == null){
+      return const Text("chat is null");
+    } else {
+      return Column(
+        children: chats.map((chat) => buildRow(chat)).toList(),
+      );
+    }
   }
 // todo list column
   Widget buildRow(chat) {

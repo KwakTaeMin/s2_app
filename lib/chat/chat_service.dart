@@ -7,8 +7,11 @@ Future<List<Chat>> getChats() async {
   var url = 'http://127.0.0.1:9091/chat';
   final response = await http.get(Uri.parse(url));
   if(response.statusCode == 200) {
-    List responseChatList = json.decode(response.body);
-    return responseChatList.map((chat) => Chat.fromJson(chat)).toList();
+
+    List<Chat> responseChatList = (json.decode(response.body) as List)
+        .map((chat) => Chat.fromJson(chat)).toList();
+    return responseChatList;
+
   } else {
     throw Exception("fail get chat list!");
   }

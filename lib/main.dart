@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+//import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'chat/chat_page.dart' as chat_page;
 
@@ -19,11 +19,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('app'),
+          title: const Text('대화 내용'),
         ),
-        body: const Center(
-          child: chat_page.ChatPage()
-        ),
+        body: const chat_page.ChatPage(),
         bottomNavigationBar: BottomAppBar (
           child: SizedBox(
             height: 100,
