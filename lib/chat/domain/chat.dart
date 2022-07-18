@@ -19,7 +19,5 @@ class Chat {
                 message: json["message"]
     );
   }
-
-
 }
 

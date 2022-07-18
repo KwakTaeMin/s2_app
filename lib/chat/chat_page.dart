@@ -1,6 +1,6 @@
 import 'dart:core';
 import 'package:flutter/material.dart';
-import 'chat.dart';
+import 'domain/chat.dart';
 import 'chat_service.dart' as chat_service;
 
 class ChatPage extends StatefulWidget{
