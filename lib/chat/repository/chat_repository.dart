@@ -2,7 +2,7 @@ import 'package:http/http.dart' as http;
 import 'package:s2_app/chat/domain/favorite_word.dart';
 import 'dart:async';
 import 'dart:convert';
-import 'domain/chat.dart';
+import '../domain/chat.dart';
 
 Future<List<Chat>> getChats() async {
   var url = 'http://127.0.0.1:9091/chat';

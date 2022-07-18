@@ -1,6 +1,6 @@
 //import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'chat/chat_page.dart' as chat_page;
+import 'chat/page/chat_page.dart' as chat_page;
 
 void main() {
 
