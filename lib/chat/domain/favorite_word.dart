@@ -14,7 +14,5 @@ class FavoriteWord {
         count: json["count"]
     );
   }
-
-
 }
 
