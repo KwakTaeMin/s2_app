@@ -1,58 +1,36 @@
 import 'dart:core';
 import 'package:flutter/material.dart';
+import 'package:s2_app/chat/bloc/chat_bloc.dart';
 import '../domain/chat.dart';
-import '../repository/chat_repository.dart' as chat_service;
 
-class ChatPage extends StatefulWidget{
+class ChatPage extends StatelessWidget{
   const ChatPage({Key? key}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _ChatPageState();
-
-}
-
-class _ChatPageState extends State<ChatPage> {
-  List<Chat> _chats = [];
-
-
-  @override
-  void initState() {
-    super.initState();
-    _chats = getChats();
-  }
-
-  List<Chat> getChats() {
-    Future<List<Chat>> fChats = chat_service.getChats();
-
-    fChats.then((value) {
-      return value;
-    });
-    return [];
-  }
-
-  @override
   Widget build(BuildContext context) {
+    chatBloc.fetchChats();
     return SizedBox(
-          height: 500,
-          width: 500,
-          child : Scrollbar(
-            child: ListView.builder(
-              //shrinkWrap: true,
-              itemBuilder: (context, index) {
-                final chat = _chats[index];
-                print(chat.messageDate);
-                return ListTile(
-                  title: Text(chat.userName),
-                  subtitle: Text(chat.message),
-                  trailing: Text(chat.messageDate,  style: const TextStyle(color: Colors.green),),
-                );
-              },
-              itemCount: _chats.length,
-              scrollDirection: Axis.horizontal,
-            ),
-          ),
+      child: StreamBuilder<List<Chat>> (
+        stream: chatBloc.chats,
+        builder: (context, AsyncSnapshot snapshot) {
+          if (!snapshot.hasData) {
+            return const Center(child: CircularProgressIndicator());
+          } else {
+            return ListView.builder(
+                itemCount: snapshot.data.length,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (BuildContext context, int index) {
+                  return Row(
+                      children: [Text('${snapshot.data[index].messageDate} ${snapshot.data[index].userName} ${snapshot.data[index].message}')]
+                  );
+                }
+            );
+          }
+        },
+      ),
+    );
 
-          );
+
   }
 
 }

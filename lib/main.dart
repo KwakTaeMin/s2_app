@@ -1,14 +1,10 @@
-//import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'chat/page/chat_page.dart' as chat_page;
 
 void main() {
-
   runApp(
     const MyApp()
-    //const,
   );
-
 }
 
 class MyApp extends StatelessWidget {
